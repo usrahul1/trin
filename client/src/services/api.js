@@ -1,22 +1,22 @@
-import axios from "axios"
+import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://trin2-be.onrender.com/",
   headers: {
     "Content-Type": "application/json",
   },
-})
+});
 
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("authToken")
+    const token = localStorage.getItem("authToken");
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`
+      config.headers.Authorization = `Bearer ${token}`;
     }
-    return config
+    return config;
   },
-  (error) => Promise.reject(error),
-)
+  (error) => Promise.reject(error)
+);
 
 export const productsApi = {
   getAll: async () => await api.get("/api/products"),
@@ -24,20 +24,20 @@ export const productsApi = {
   create: async (data) => await api.post("/api/products", data),
   update: async (id, data) => await api.put(`/api/products/${id}`, data),
   delete: async (id) => await api.delete(`/api/products/${id}`),
-}
+};
 
 export const ordersApi = {
   getAll: async () => await api.get("/api/orders"),
-  
+
   getById: async (id) => await api.get(`/api/orders/${id}`),
-  
+
   create: async (data) => {
     const response = await api.post("/api/orders", data);
-    return response; 
+    return response;
   },
-  
-  updateStatus: async (id, status) => await api.put(`/api/orders/${id}`, { status }),
+
+  updateStatus: async (id, status) =>
+    await api.put(`/api/orders/${id}`, { status }),
 };
 
-
-export default api
+export default api;
