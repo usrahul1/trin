@@ -22,8 +22,8 @@
     "webpack-manifest-plugin": "^5.0.1"
   },
   "scripts": {
-    "start": "set PORT=5000 && react-scripts start",
-    "build": "react-scripts build --no-source-map",
+    "start": "set PORT=5173 && react-scripts start",
+    "build": "set NODE_OPTIONS=--max-old-space-size=4096 && npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -52,7 +52,6 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "engines": {
-  "node": "18.x"
-}
-
+    "node": "18.x"
+  }
 }
